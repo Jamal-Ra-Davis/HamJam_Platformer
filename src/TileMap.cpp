@@ -20,6 +20,8 @@ TileMap::TileMap(int tileSize_, SDL_Renderer *renderTarget_)
 
 	numTilesAcross = 0;
 	numTilesVert = 0;
+    x_max = 0;
+    y_max = 0;
 	fix_bounds = true;
 
     x = 0;
@@ -169,6 +171,9 @@ void TileMap::loadMap(std::string s)
 	height = numRows * tileSize;
 
     printf("Horizontal tiles: %d, Vertical Tiles: %d\n", numCols, numRows);
+    x_max = numCols;
+    y_max = numRows;
+    
 
 	xmin = GamePanel::WIDTH - width;
 	xmax = 0;
@@ -191,6 +196,99 @@ void TileMap::loadMap(std::string s)
 
 	fclose(fp);
 }
+void TileMap::deleteMap()
+{
+    for (int row=0; row<numRows; row++)
+    {
+        if (map[row])
+            delete[] map[row];
+        map[row] = NULL;
+    }
+    if (map)
+        delete[] map;
+}
+void TileMap::makeMap(int rows, int cols, std::string s)
+{
+    if (strlen(s.c_str()) == 0)
+    {
+        printf("Make empty map\n");
+        //Empty map
+        numRows = rows;
+        numCols = cols;
+
+        width = numCols * tileSize;
+        height = numRows * tileSize;
+    
+        xmin = GamePanel::WIDTH - width;
+        xmax = 0;
+        ymin = GamePanel::HEIGHT - height;
+        ymax = 0;
+
+        if (map)
+            deleteMap();
+        map = new int*[numRows];
+        for (int row=0; row < numRows; row++)
+        {
+            map[row] = new int[numCols];
+            for (int col=0; col < numCols; col++)
+                map[row][col] = 0;
+        }
+    }
+    else
+    {
+        printf("Load map\n");
+        //Load map
+        loadMap(s);
+    }
+}
+void TileMap::saveMap(std::string s)
+{
+    printf("Saving map...");
+    FILE *fp = NULL;
+    fp = fopen(s.c_str(), "w");
+    if (fp == NULL)
+    {
+        printf("Failed to open file: %s\n", s.c_str());
+        return;
+    }
+
+    fprintf(fp, "%d\n%d\n", x_max+1, y_max+1);
+    
+    for (int row=0; row<=y_max; row++)
+    {
+        for (int col=0; col<=x_max; col++)
+        {
+            fprintf(fp, "%d ", map[row][col]);
+        }
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
+}
+int TileMap::getMapIdx(int r, int c)
+{
+    return map ? map[r][c] : -1;
+}
+int TileMap::setMapIdx(int r, int c, int idx, bool track) 
+{
+    if (map == NULL)
+        return -1;
+    if (map[r] == NULL)
+        return -1;
+    map[r][c] = idx;
+    if (track)
+    {
+        if (r > y_max)
+        {
+            y_max = r;
+        }
+        if (c > x_max)
+        {
+            x_max = c;
+        }
+    }
+    return 0;
+}
+
 void TileMap::fixBounds()
 {
 	if (x < xmin)

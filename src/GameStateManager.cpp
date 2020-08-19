@@ -5,10 +5,10 @@
 GameStateManager::GameStateManager(SDL_Renderer *renderTarget_)
 {
 	renderTarget = renderTarget_;
-	//currentState = MENU_STATE;
+
+	//currentState = LEVEL_CREATOR_STATE;
 	currentState = PIG_STATE;
 
-	//currentState = WIN_STATE;
 	score = 0;
 	gameStates = new GameState*[NUM_STATES];
 	for (int i=0; i<NUM_STATES; i++)
@@ -89,7 +89,13 @@ void GameStateManager::loadState(int state)
 		}
         case PIG_STATE:
         {
-            gameStates[state] =  new PigState(this, renderTarget);        
+            gameStates[state] =  new PigState(this, renderTarget);
+            break; 
+        }
+        case LEVEL_CREATOR_STATE:
+        {
+            gameStates[state] =  new LevelCreator(this, renderTarget);
+            break;
         }
         default:
         {

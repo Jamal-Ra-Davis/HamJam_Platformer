@@ -224,7 +224,6 @@ class PigState : public GameState
         bool game_win;
         bool player_died;
 
-
         SDL_Texture *preScaleTexture;// = NULL;
         SDL_Texture *gameWorldTexture;// = NULL;
 
@@ -247,4 +246,27 @@ class PigState : public GameState
         void keyPressed(int k);
         void keyReleased(int k);
 };
+class LevelCreator : public GameState
+{
+    private:
+        TileMap *tileMap;
+        Background *bg;
 
+        SDL_Texture *preScaleTexture;
+
+        std::string map_name;
+        int cursor_x, cursor_y;
+        int tile_idx;
+        bool space_pressed;
+
+        void reset();
+
+    public:
+        LevelCreator(GameStateManager *gsm_, SDL_Renderer *renderTarget_);
+        ~LevelCreator();
+        void init();
+        void update();
+        void draw();
+        void keyPressed(int k);
+        void keyReleased(int k);
+};

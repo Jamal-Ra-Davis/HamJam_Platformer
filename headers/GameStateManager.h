@@ -23,7 +23,7 @@ class GameStateManager
 	public:
 		enum GameStateNames
 		{
-    		MENU_STATE, TITLE_STATE, LEVEL1_STATE, WIN_STATE, PIG_STATE, NUM_STATES
+    		MENU_STATE, TITLE_STATE, LEVEL1_STATE, WIN_STATE, PIG_STATE, LEVEL_CREATOR_STATE, NUM_STATES
 		};
 
 		GameStateManager(SDL_Renderer *renderTarget_);

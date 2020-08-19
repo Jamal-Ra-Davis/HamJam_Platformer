@@ -22,6 +22,7 @@ class TileMap
 		int tileSize;
 		int numRows, numCols;
 		int width, height;
+        int x_max, y_max;
 
 		//Tileset
 		SDL_Texture *tileset;
@@ -58,6 +59,13 @@ class TileMap
 		void setPosition(double x, double y);
 		void setTween(double t) {tween = t;}		
 		void setFixBounds(bool b) {fix_bounds = b;}	
+        int getMapIdx(int r, int c); 
+        int setMapIdx(int r, int c, int idx, bool track); 
+        int** getMap() {return map;}
+        
+        void deleteMap();
+        void makeMap(int rows, int cols, std::string s);
+        void saveMap(std::string s);
 	
 		void draw();	
 };
