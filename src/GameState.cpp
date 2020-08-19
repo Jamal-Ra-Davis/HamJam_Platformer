@@ -1780,6 +1780,7 @@ void PigState::init()
 }
 void PigState::update()
 {
+    static int cnt = 0;
     //tileMap->setPosition(GamePanel::WIDTH/2 - pig_player->getX(),
     //                     GamePanel::HEIGHT/2 - pig_player->getY());
     //tileMap->setPosition(GamePanel::WIDTH/2 - pig_startX,
@@ -1787,6 +1788,15 @@ void PigState::update()
     pig_player->update();
     tileMap->setPosition(GamePanel::WIDTH/2 - pig_player->getX(),
                          GamePanel::HEIGHT/2 - pig_player->getY());
+
+    cnt++;
+    if (cnt % 30 == 0)
+    {
+        int tile_idx = tileMap->getMapIdx(5, 5);
+        tile_idx++;
+        tile_idx %= 30;
+        tileMap->setMapIdx(5, 5, tile_idx);
+    }
 }
 void PigState::draw()
 {
@@ -1915,6 +1925,11 @@ void PigState::keyPressed(int k)
         }
         case SDLK_RETURN:
         {
+            break;
+        }
+        case SDLK_z:
+        {
+            pig_player->dashAction();
             break;
         }
     }

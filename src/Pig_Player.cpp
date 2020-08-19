@@ -25,7 +25,7 @@ Pig_Player::Pig_Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm,
     cwidth = 40;
     cheight = 30;//27;
 	cOffset_x = 0;
-	cOffset_y = 10;	
+	cOffset_y = 9;	
 
     maxSpeed = 6;
 	moveSpeed = 0.35;//maxSpeed;
@@ -393,6 +393,7 @@ void Pig_Player::update()
 
 
 	onGround = false;
+/*
 	if (xdest - cwidth/2 + cOffset_x < 0)
 	{
 		xdest = cwidth/2 - cOffset_x;
@@ -403,6 +404,7 @@ void Pig_Player::update()
 			dash_end = true;
 		}
 	}
+*/
 /*
 	else if (xdest + cwidth/2 + cOffset_x > GamePanel::WINDOW_WIDTH)
 	{
@@ -434,13 +436,48 @@ void Pig_Player::update()
 */
 
 
-    float y_ = ydest + cheight/2 + 9;
-    //printf("**ydest = %f, bottom = %f, dy = %f\n", ydest, y_, dy);
-    if (tileMap->checkTileCollision(xdest, y_))
+    float x_left = xdest - cwidth/2 + 0;
+    float x_right = xdest + cwidth/2 + 0;
+    if (tileMap->checkTileCollision(x_left, ydest))
     {
-        Tile *t = tileMap->getTileFromPos(xdest, y_);
-        int targ = (int)(y_/30) * 30;
-        float diff = targ - y_ - 0.1;
+        int targ = (int)(x_left/30);
+        if ((int)(x_left) % 30)
+        {
+            targ++;
+        }
+        targ *= 30;
+        float diff = targ - x_left + 0.1;
+        xdest += diff;
+        dx = 0;
+        if (dashing)
+        {
+            dashStop();
+            dash_end = true;
+        }
+    }
+    else if (tileMap->checkTileCollision(x_right, ydest))
+    {
+        int targ = (int)(x_right/30);
+        targ *= 30;
+        float diff = targ - x_right - 0.1;
+        xdest += diff;
+        dx = 0;
+        if (dashing)
+        {
+            dashStop();
+            dash_end = true;
+        }
+    }
+
+
+
+    float y_bottom = ydest + cheight/2 + 9;
+    float y_top = ydest - cheight/2 + 5;
+    //printf("**ydest = %f, bottom = %f, dy = %f\n", ydest, y_, dy);
+    if (tileMap->checkTileCollision(xdest, y_bottom))
+    {
+        int targ = (int)(y_bottom/30) * 30;
+        float diff = targ - y_bottom - 0.1;
         //printf("Target = %d, y_ = %f, diff = %f\n", targ, y_, diff);
         //printf("Collision!!\n");
         ydest += diff;
@@ -454,8 +491,24 @@ void Pig_Player::update()
         //y--;
         //printf("##ydest = %f, bottom = %f\n", ydest, ydest + cheight/2 + 9);
     }
-    //printf("Current action = %d\n\n", currentAction);
+    else if (tileMap->checkTileCollision(xdest, y_top))
+    {
+        int targ = (int)(y_top/30);
+        if ((int)(y_top) % 30)
+        {
+            targ++;
+        }
+        targ *= 30;
+        float diff = targ - y_top + 0.1;
+        //printf("Target = %d, y_ = %f, diff = %f\n", targ, y_, diff);
+        //printf("Collision!!\n");
+        ydest += diff;
+        //ydest -= .1;
+        dy = 0;
+        //if (dashing)
+        //    dashStop();
 
+    }
 
 /*
 	if (dashing)
