@@ -223,6 +223,7 @@ class PigState : public GameState
         bool game_over;
         bool game_win;
         bool player_died;
+        bool create_pressed;
 
         SDL_Texture *preScaleTexture;// = NULL;
         SDL_Texture *gameWorldTexture;// = NULL;
@@ -258,6 +259,8 @@ class LevelCreator : public GameState
         int cursor_x, cursor_y;
         int tile_idx;
         bool space_pressed;
+        bool save_pressed;
+        bool play_pressed;
 
         void reset();
 

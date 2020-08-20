@@ -36,7 +36,8 @@ class TileMap
 
 		bool fix_bounds;
 		void fixBounds();
-		
+        void loadMapCreator(std::string s, int rows, int cols);	
+	
 	public:
 		TileMap(int tileSize_, SDL_Renderer *renderTarget_);
 		~TileMap();

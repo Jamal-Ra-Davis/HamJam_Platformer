@@ -1730,6 +1730,8 @@ void PigState::init()
     game_over = false;
     game_win = false;
     player_died = false;
+    create_pressed = false;
+
 
     tileMap = new TileMap(30, renderTarget);
     //tileMap = new TileMap(12, renderTarget);
@@ -1785,6 +1787,13 @@ void PigState::update()
     //                     GamePanel::HEIGHT/2 - pig_player->getY());
     //tileMap->setPosition(GamePanel::WIDTH/2 - pig_startX,
     //                     GamePanel::HEIGHT/2 - pig_startY);
+    if (create_pressed)
+    {
+       gsm->setState(GameStateManager::LEVEL_CREATOR_STATE);
+       return; 
+    }
+    create_pressed = false;
+
     pig_player->update();
     tileMap->setPosition(GamePanel::WIDTH/2 - pig_player->getX(),
                          GamePanel::HEIGHT/2 - pig_player->getY());
@@ -1932,6 +1941,11 @@ void PigState::keyPressed(int k)
             pig_player->dashAction();
             break;
         }
+        case SDLK_c:
+        {
+            create_pressed = true;
+            break;
+        }
     }
 }
 void PigState::keyReleased(int k)
@@ -2016,7 +2030,7 @@ void LevelCreator::init()
 {
     tileMap = new TileMap(30, renderTarget);
     tileMap->loadTiles("./Resources/Tilesets/grasstileset.bmp", "");
-    tileMap->makeMap(200, 200, "");
+    tileMap->makeMap(200, 200, "./Resources/Maps/creator_map.map");
     tileMap->setPosition(0, 0);
     tileMap->setTween(1);
 
@@ -2028,7 +2042,9 @@ void LevelCreator::init()
     cursor_y = 0;
     tile_idx = 0;
     map_name = "./Resources/Maps/creator_map.map";
-    space_pressed = false; 
+    space_pressed = false;
+    save_pressed = false;
+    play_pressed = false; 
 }
 void LevelCreator::update()
 {
@@ -2066,6 +2082,18 @@ void LevelCreator::update()
         tileMap->setMapIdx(cursor_y, cursor_x, tile_idx, true);
     }
     space_pressed = false;
+
+    if (save_pressed)
+    {
+        tileMap->saveMap(map_name);
+    }
+    save_pressed = false;
+
+    if (play_pressed)
+    {
+        gsm->setState(GameStateManager::PIG_STATE);
+        return;
+    }
 
     tileMap->setPosition(GamePanel::WIDTH/2 - cursor_x*30,
                          GamePanel::HEIGHT/2 - cursor_y*30);
@@ -2170,6 +2198,7 @@ void LevelCreator::keyPressed(int k)
         }
         case SDLK_RSHIFT:
         {
+            *(GamePanel::isRunningControl) = false;
             break;
         }
         case SDLK_RETURN:
@@ -2188,7 +2217,13 @@ void LevelCreator::keyPressed(int k)
         }
         case SDLK_s:
         {
-            tileMap->saveMap(map_name);
+            save_pressed = true;
+            break;
+        }
+        case SDLK_p:
+        {
+            play_pressed = true;
+            save_pressed = true;
             break;
         }
     }

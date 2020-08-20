@@ -192,9 +192,68 @@ void TileMap::loadMap(std::string s)
 			//printf("DEBUG: %d\n", temp);
 		}
 	}
-
-
 	fclose(fp);
+}
+void TileMap::loadMapCreator(std::string s, int rows, int cols)
+{
+    FILE *fp = NULL;
+    fp = fopen(s.c_str(), "r");
+    if (fp == NULL)
+    {
+        printf("Failed to open file: %s\n", s.c_str());
+        return;
+    }
+
+    int map_cols;
+    int map_rows;
+
+    fscanf(fp, "%d", &map_cols);
+    fscanf(fp, "%d", &map_rows);
+
+    printf("Horizontal tiles: %d, Vertical Tiles: %d\n", map_cols, map_rows);
+    x_max = map_cols - 1;
+    y_max = map_rows - 1;
+
+    numCols = cols;
+    numRows = rows;
+    if (map_cols > cols)
+    {
+        numCols = map_cols;
+    }
+    if (map_rows > rows)
+    {
+        numRows = map_rows;
+    }
+
+    width = numCols * tileSize;
+    height = numRows * tileSize;
+
+
+    xmin = GamePanel::WIDTH - width;
+    xmax = 0;
+    ymin = GamePanel::HEIGHT - height;
+    ymax = 0;
+
+    map = new int*[numRows];
+    for (int row=0; row<numRows; row++)
+    {
+        map[row] = new int[numCols];
+        for (int col=0; col<numCols; col++)
+        {
+            if (row < map_rows && col < map_cols)
+            {
+                int temp;
+                fscanf(fp, "%d", &temp);
+                map[row][col] = temp;
+            }
+            else
+            {
+                map[row][col] = 0;
+            }
+        }
+    }
+    fclose(fp);
+
 }
 void TileMap::deleteMap()
 {
@@ -238,12 +297,12 @@ void TileMap::makeMap(int rows, int cols, std::string s)
     {
         printf("Load map\n");
         //Load map
-        loadMap(s);
+        loadMapCreator(s, rows, cols);
     }
 }
 void TileMap::saveMap(std::string s)
 {
-    printf("Saving map...");
+    printf("Saving map...\n");
     FILE *fp = NULL;
     fp = fopen(s.c_str(), "w");
     if (fp == NULL)
