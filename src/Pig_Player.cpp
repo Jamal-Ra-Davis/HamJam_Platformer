@@ -29,11 +29,11 @@ Pig_Player::Pig_Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm,
 
     maxSpeed = 6;
 	moveSpeed = 0.35;//maxSpeed;
-    stopSpeed = 0.35;//maxSpeed;
+    stopSpeed = 0.5;//0.35;//maxSpeed;
 
     fallSpeed = 0.35;
     maxFallSpeed = 15.0;
-    jumpStart = -10;
+    jumpStart = -8;//-10;
 
     facingRight = true;
 

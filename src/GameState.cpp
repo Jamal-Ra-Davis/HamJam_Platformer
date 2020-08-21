@@ -5,8 +5,8 @@
 #include "../headers/Slugger.h"
 #include "../headers/InputBuffer.h"
 
-#define GAME_WINDOW_W 300
-#define GAME_WINDOW_H 220
+#define GAME_WINDOW_W GamePanel::WIDTH //480 //300
+#define GAME_WINDOW_H GamePanel::HEIGHT //352 //220
 
 MenuState::MenuState(GameStateManager *gsm_, SDL_Renderer *renderTarget_) 
 {
@@ -1829,6 +1829,9 @@ void PigState::draw()
     //SDL_SetRenderTarget( renderTarget, gameWorldTexture );
     SDL_SetRenderTarget( renderTarget, preScaleTexture );
 
+    SDL_Rect bg_rect = {0, 0, GamePanel::WIDTH, GamePanel::HEIGHT};
+    SDL_RenderFillRect(renderTarget, &bg_rect);
+
     //Draw Background
     //bg->draw();
 
@@ -2123,6 +2126,10 @@ void LevelCreator::draw()
     int window_width, window_height;
 
     SDL_SetRenderTarget(renderTarget, preScaleTexture);
+
+
+    SDL_Rect bg_rect = {0, 0, GamePanel::WIDTH, GamePanel::HEIGHT};
+    SDL_RenderFillRect(renderTarget, &bg_rect);
 
     bg->draw();
 

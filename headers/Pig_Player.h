@@ -24,8 +24,8 @@ class Pig_Player : public MapObject
 		bool dashing;
 		double dashStartX;
 		double dashStartY;
-		static constexpr double dashSpeed=15.0;
-		static const int DASH_LEN = 200;
+		static constexpr double dashSpeed=12.0;//15.0;
+		static const int DASH_LEN = 125;//200;
 
 		static const int DRIFT_VAL=5;
 	
