@@ -27,13 +27,18 @@ Pig_Player::Pig_Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm,
 	cOffset_x = 0;
 	cOffset_y = 9;	
 
-    maxSpeed = 6;
-	moveSpeed = 0.35;//maxSpeed;
-    stopSpeed = 0.5;//0.35;//maxSpeed;
 
-    fallSpeed = 0.35;
-    maxFallSpeed = 15.0;
-    jumpStart = -8;//-10;
+    dashSpeed = DEF_DASH_SPEED;
+    dash_len = DEF_DASH_LEN;
+    drift_val = DEF_DRIFT_VAL;
+
+    maxSpeed = DEF_MAX_SPEED;
+	moveSpeed = DEF_MOVE_SPEED;//maxSpeed;
+    stopSpeed = DEF_STOP_SPEED;//0.35;//maxSpeed;
+
+    fallSpeed = DEF_FALL_SPEED;
+    maxFallSpeed = DEF_MAX_FALL_SPEED;
+    jumpStart = DEF_JUMP_START;//-10;
 
     facingRight = true;
 
@@ -156,7 +161,7 @@ void Pig_Player::getNextPosition()
 	{
 		if (left)
 		{
-			dx -= moveSpeed/DRIFT_VAL;
+			dx -= moveSpeed/drift_val;
 			if (dx < -maxSpeed)
 			{
 				dx = -maxSpeed;
@@ -164,7 +169,7 @@ void Pig_Player::getNextPosition()
 		}
 		else if (right)
 		{
-			dx += moveSpeed/DRIFT_VAL;
+			dx += moveSpeed/drift_val;
             if (dx > maxSpeed)
             {
                 dx = maxSpeed;
@@ -290,7 +295,7 @@ void Pig_Player::getNextPosition()
 		{
 			 if (left)
         	{
-            	dx -= moveSpeed/DRIFT_VAL;
+            	dx -= moveSpeed/drift_val;
             	if (dx < -maxSpeed)
             	{
                 	dx = -maxSpeed;
@@ -298,7 +303,7 @@ void Pig_Player::getNextPosition()
             }
         	else if (right)
         	{
-            	dx += moveSpeed/DRIFT_VAL;
+            	dx += moveSpeed/drift_val;
             	if (dx > maxSpeed)
             	{
                 	dx = maxSpeed;
@@ -373,6 +378,142 @@ SDL_Rect Pig_Player::getCollisionRect()
     cRect.w = cwidth;
     cRect.h = cheight;
     return cRect;
+}
+int Pig_Player::loadStats(std::string s)
+{
+    FILE *stat_file = NULL;
+    char buf[128];
+
+    stat_file = fopen(s.c_str(), "r");
+    if (stat_file == NULL)
+    {
+        printf("Failed to open file: %s\n", s.c_str());
+        return -1;
+    }
+    while(fgets(buf, 128, stat_file) != NULL)
+    {
+        printf("Line: '%s'\n", buf);
+        if (buf[0] == '#')
+        {
+            continue;
+        }
+        
+        char str_flag[64] = {'\0'};
+        int ret = sscanf(buf, "%s ", str_flag);
+        printf("Parsed data: str_flag = %s, return = %d\n", str_flag, ret);
+        pig_stats_t stat = NUM_STATS;
+        for (int i = 0; i<NUM_STATS; i++)
+        {
+            if (strcmp(str_flag, stat_map[i].stat_str) == 0)
+            {   
+                printf("Stat match!\n");
+                stat = stat_map[i].stat;
+                break;
+            }
+        } 
+        printf("STAT: %d\n", stat);
+
+        switch(stat)
+        {
+            case DASH_SPEED:
+            {
+                float dash_speed_;
+                ret = sscanf(buf, "%s %f", str_flag, &dash_speed_);
+                if (ret == 2)
+                {
+                    dashSpeed = dash_speed_;
+                }
+                break;
+            }
+            case DASH_LEN_MAP:
+            {
+                int dash_len_;
+                ret = sscanf(buf, "%s %d", str_flag, &dash_len_);
+                if (ret == 2)
+                {
+                    dash_len = dash_len_;
+                }
+                break;
+            }
+            case DRIFT_VAL_MAP:
+            {
+                float drift_val_;
+                ret = sscanf(buf, "%s %f", str_flag, &drift_val_);
+                if (ret == 2)
+                {
+                    drift_val = drift_val_;
+                }
+                break;
+            }
+            case MAX_SPEED:
+            {
+                int max_speed_;
+                ret = sscanf(buf, "%s %d", str_flag, &max_speed_);
+                if (ret == 2)
+                {
+                    maxSpeed = max_speed_;
+                }
+                break;
+            }
+            case MOVE_SPEED:
+            {
+                float move_speed_;
+                ret = sscanf(buf, "%s %f", str_flag, &move_speed_);
+                if (ret == 2)
+                {
+                    moveSpeed = move_speed_;
+                }
+                break;
+            }
+            case STOP_SPEED:
+            {
+                float stop_speed_;
+                ret = sscanf(buf, "%s %f", str_flag, &stop_speed_);
+                if (ret == 2)
+                {
+                    stopSpeed = stop_speed_;
+                }
+                break;
+            }
+            case FALL_SPEED:
+            {
+                float fall_speed_;
+                ret = sscanf(buf, "%s %f", str_flag, &fall_speed_);
+                if (ret == 2)
+                {
+                    fallSpeed = fall_speed_;
+                }
+                break;
+            }
+            case MAX_FALL_SPEED:
+            {
+                float max_fall_speed_;
+                ret = sscanf(buf, "%s %f", str_flag, &max_fall_speed_);
+                if (ret == 2)
+                {
+                    maxFallSpeed = max_fall_speed_;
+                }
+                break;
+            }
+            case JUMP_START_MAP:
+            {
+                int jump_start_;
+                ret = sscanf(buf, "%s %d", str_flag, &jump_start_);
+                if (ret == 2)
+                {
+                    jumpStart = jump_start_;
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
+            
+        }      
+    }
+
+    return 0;
 }
 void Pig_Player::reset(double x, double y)
 {
@@ -532,7 +673,7 @@ void Pig_Player::update()
 		double delta = x - dashStartX;
 		if (delta < 0)
 			delta *= -1;
-		if (delta >= DASH_LEN)
+		if (delta >= dash_len)
 		{
 			dashStop();
 		}
@@ -567,7 +708,7 @@ void Pig_Player::update()
 		double delta = x - dashStartX;
         if (delta < 0)
             delta *= -1;
-        if (delta >= DASH_LEN)
+        if (delta >= dash_len)
         {
             dashStop();
 			//dash_end = true;

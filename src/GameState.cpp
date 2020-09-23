@@ -1760,7 +1760,7 @@ void PigState::init()
     pig_player = new Pig_Player(tileMap, renderTarget);
     pig_player->setPosition(pig_startX, pig_startY);
     pig_player->setVector(0, 0);
-
+    pig_player->loadStats("./Resources/Files/Pig_Stats.txt");
 
     cake = new Cake(tileMap, renderTarget, 10);
     cake->setPosition(pig_startX + 150, pig_startY + 0);
@@ -1973,6 +1973,11 @@ void PigState::keyPressed(int k)
         case SDLK_c:
         {
             create_pressed = true;
+            break;
+        }
+        case SDLK_l:
+        {
+            pig_player->loadStats("./Resources/Files/Pig_Stats.txt");
             break;
         }
     }
