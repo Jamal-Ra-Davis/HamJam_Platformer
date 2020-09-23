@@ -21,6 +21,9 @@
 #include "../headers/Letters.h"
 #include "../headers/GoS_StartMenu.h"
 #include "../headers/Pig_Player.h"
+#include "../headers/Cake.h"
+
+
 
 #define NUM_OPTIONS 2
 class GameStateManager;
@@ -214,7 +217,7 @@ class PigState : public GameState
         TileMap *tileMap;
         Background *bg;
         Pig_Player *pig_player;
-
+        Cake *cake;
 
 
         int pig_startX, pig_startY;

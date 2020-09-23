@@ -1,8 +1,8 @@
-OBJS = 	./src/GuardiansOfSunshine.o ./src/SDL_Helpers.o ./src/GamePanel.o ./src/GameStateManager.o ./src/GameState.o ./src/Background.o\
+OBJS = 	./src/HamJam_Platformer.o ./src/SDL_Helpers.o ./src/GamePanel.o ./src/GameStateManager.o ./src/GameState.o ./src/Background.o\
 		./src/TileMap.o ./src/Tile.o ./src/MapObject.o ./src/Animation.o ./src/Player.o ./src/FireBall.o ./src/Enemy.o ./src/Slugger.o\
 		./src/HUD.o ./src/Explosion.o ./src/AudioPlayer.o ./src/BgObject.o ./src/GoS_Player.o ./src/Coin.o ./src/TriggerBox.o\
 		./src/GoS_HUD.o ./src/Numbers.o ./src/Bomba.o ./src/BouncyBee.o ./src/Poof.o ./src/HoneyBunny.o ./src/SleepySam.o ./src/ComboMove.o\
-		./src/InputBuffer.o ./src/Letters.o ./src/GoS_StartMenu.o ./src/Pig_Player.o
+		./src/InputBuffer.o ./src/Letters.o ./src/GoS_StartMenu.o ./src/Pig_Player.o ./src/Cake.o
 
 CC = g++
 DEBUG = -g
@@ -16,8 +16,8 @@ DH = ./headers/
 #g++ SpriteAnimation.cpp -w -lSDL2 -o SpriteAnimation
 
 
-GuardiansOfSunshine: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o GuardiansOfSunshine
+HamJam_Platformer: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o HamJam_Platformer
 
 #enemy.o: $(DS)enemy.cpp $(DH)enemy.h $(DH)skill.h $(DH)FileFunctions.h
 #	$(CC) $(CFLAGS) $(DS)enemy.cpp -o $(DS)enemy.o
@@ -64,6 +64,9 @@ Player.o: $(DS)Player.cpp $(DH)Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH
 
 Pig_Player.o: $(DS)Pig_Player.cpp $(DH)Pig_Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)Pig_Player.cpp -o $(DS)Pig_Player.o  
+
+Cake.o: $(DS)Cake.cpp $(DH)Cake.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)AudioPlayer.h
+	$(CC) -c $(CFLAGS) $(DS)Cake.cpp -o $(DS)Cake.o
 
 FireBall.o: $(DS)FireBall.cpp $(DH)FireBall.h $(DH)MapObject.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)FireBall.cpp -o $(DS)FireBall.o
@@ -133,8 +136,8 @@ Letters.o: $(DS)Letters.cpp $(DH)Letters.h $(DH)SDL_Helpers.h
 GoS_StartMenu.o: $(DS)GoS_StartMenu.cpp $(DH)GoS_StartMenu.h
 	$(CC) -c $(CFLAGS) $(DS)GoS_HUD.cpp -o $(DS)GoS_HUD.o
 
-GuardiansOfSunshine.o: $(DS)GuardiansOfSunshine.cpp $(DH)SDL_Helpers.h $(DH)GamePanel.h
-	$(CC) -c $(CFLAGS) $(DS)GuardiansOfSunshine.cpp -o $(DS)GuardiansOfSunshine.o
+HamJam_Platformer.o: $(DS)HamJam_Platformer.cpp $(DH)SDL_Helpers.h $(DH)GamePanel.h
+	$(CC) -c $(CFLAGS) $(DS)HamJam_Platformer.cpp -o $(DS)HamJam_Platformer.o
 
 
 clean:

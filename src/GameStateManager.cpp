@@ -6,8 +6,8 @@ GameStateManager::GameStateManager(SDL_Renderer *renderTarget_)
 {
 	renderTarget = renderTarget_;
 
-	currentState = LEVEL_CREATOR_STATE;
-	//currentState = PIG_STATE;
+	//currentState = LEVEL_CREATOR_STATE;
+	currentState = PIG_STATE;
 
 	score = 0;
 	gameStates = new GameState*[NUM_STATES];

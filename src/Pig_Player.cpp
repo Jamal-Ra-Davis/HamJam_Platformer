@@ -201,6 +201,20 @@ void Pig_Player::getNextPosition()
 		{
 			onGround = false;
 			dy = jumpStart;
+            /*
+            if (right)
+            {
+                dx += maxSpeed*0.5;
+                if (dx > maxSpeed)
+                    dx = maxSpeed;
+            }
+            else if (left)
+            {
+                dx -= maxSpeed*0.5;
+                if (dx < -maxSpeed)
+                    dx = -maxSpeed;
+            }
+            */
 		}
 		else if (canDoubleJump)
 		{
@@ -281,7 +295,7 @@ void Pig_Player::getNextPosition()
             	{
                 	dx = -maxSpeed;
             	}
-        }
+            }
         	else if (right)
         	{
             	dx += moveSpeed/DRIFT_VAL;
@@ -438,7 +452,7 @@ void Pig_Player::update()
 
     float x_left = xdest - cwidth/2 + 0;
     float x_right = xdest + cwidth/2 + 0;
-    if (tileMap->checkTileCollision(x_left, ydest))
+    if (tileMap->checkTileCollision(x_left, y))
     {
         int targ = (int)(x_left/30);
         if ((int)(x_left) % 30)
@@ -455,7 +469,7 @@ void Pig_Player::update()
             dash_end = true;
         }
     }
-    else if (tileMap->checkTileCollision(x_right, ydest))
+    else if (tileMap->checkTileCollision(x_right, y))
     {
         int targ = (int)(x_right/30);
         targ *= 30;
@@ -474,7 +488,7 @@ void Pig_Player::update()
     float y_bottom = ydest + cheight/2 + 9;
     float y_top = ydest - cheight/2 + 5;
     //printf("**ydest = %f, bottom = %f, dy = %f\n", ydest, y_, dy);
-    if (tileMap->checkTileCollision(xdest, y_bottom))
+    if (tileMap->checkTileCollision(x, y_bottom))
     {
         int targ = (int)(y_bottom/30) * 30;
         float diff = targ - y_bottom - 0.1;
@@ -491,7 +505,7 @@ void Pig_Player::update()
         //y--;
         //printf("##ydest = %f, bottom = %f\n", ydest, ydest + cheight/2 + 9);
     }
-    else if (tileMap->checkTileCollision(xdest, y_top))
+    else if (tileMap->checkTileCollision(x, y_top))
     {
         int targ = (int)(y_top/30);
         if ((int)(y_top) % 30)

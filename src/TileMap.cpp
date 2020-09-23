@@ -10,7 +10,7 @@ TileMap::TileMap(int tileSize_, SDL_Renderer *renderTarget_)
 	tileSize = tileSize_;
 	numRowsToDraw = (GamePanel::HEIGHT / tileSize) + 2;
 	numColsToDraw = (GamePanel::WIDTH / tileSize) + 2;
-	tween = 1;//0.07;
+	tween = 0;//0.07;
 
     
 

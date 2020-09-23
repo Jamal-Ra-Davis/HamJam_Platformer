@@ -1676,6 +1676,7 @@ PigState::PigState(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
     tileMap = NULL;
     bg = NULL;
     pig_player = NULL;
+    cake = NULL;
 
     preScaleTexture = NULL;
     gameWorldTexture = NULL;
@@ -1696,6 +1697,11 @@ PigState::~PigState()
     if (pig_player)
         delete pig_player;
     pig_player = NULL;
+
+    if (cake)
+        delete cake;
+    cake = NULL;
+
 
     if (preScaleTexture)
         SDL_DestroyTexture(preScaleTexture);
@@ -1722,7 +1728,7 @@ void PigState::init()
 {
 
     pig_startX = 120;
-    pig_startY = 105;
+    pig_startY = 160;
 
     score = 0;
     lives = 2;
@@ -1754,6 +1760,11 @@ void PigState::init()
     pig_player = new Pig_Player(tileMap, renderTarget);
     pig_player->setPosition(pig_startX, pig_startY);
     pig_player->setVector(0, 0);
+
+
+    cake = new Cake(tileMap, renderTarget, 10);
+    cake->setPosition(pig_startX + 150, pig_startY + 0);
+    cake->setVector(0, 0);
 
     
     trackPlayerY = false;
@@ -1787,6 +1798,11 @@ void PigState::update()
     //                     GamePanel::HEIGHT/2 - pig_player->getY());
     //tileMap->setPosition(GamePanel::WIDTH/2 - pig_startX,
     //                     GamePanel::HEIGHT/2 - pig_startY);
+    if (pig_player->getY() > tileMap->getHeight() + 100)
+    {
+        gsm->setState(GameStateManager::PIG_STATE);
+        return;
+    }
     if (create_pressed)
     {
        gsm->setState(GameStateManager::LEVEL_CREATOR_STATE);
@@ -1795,6 +1811,15 @@ void PigState::update()
     create_pressed = false;
 
     pig_player->update();
+    cake->update();
+    if (pig_player->intersects(cake) && !cake->isCollected())
+    {
+        cake->collect();
+        pig_player->recharge();
+    } 
+    pig_player->recharge();
+
+
     tileMap->setPosition(GamePanel::WIDTH/2 - pig_player->getX(),
                          GamePanel::HEIGHT/2 - pig_player->getY());
 
@@ -1845,6 +1870,7 @@ void PigState::draw()
     tileMap->draw();
 
     pig_player->draw();
+    cake->draw();
 
 /*
     //Setup to render to preScaleTexture instead of final screen

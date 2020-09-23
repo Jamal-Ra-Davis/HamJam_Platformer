@@ -18,6 +18,15 @@ class Pig_Player : public MapObject
 		int cOffset_x;
 		int cOffset_y;
 
+
+        enum {BOTTOM_LEFT, BOTTOM_RIGHT, NUM_OFFSETS};
+
+        static constexpr int collider_offsets[NUM_OFFSETS][2]  = {
+                                                    {-8, 24},
+                                                    {10, 24},
+                                                  };
+
+
 		bool canDash;
 		bool dashStart;
 		bool dash_end;
@@ -27,7 +36,7 @@ class Pig_Player : public MapObject
 		static constexpr double dashSpeed=12.0;//15.0;
 		static const int DASH_LEN = 125;//200;
 
-		static const int DRIFT_VAL=5;
+		static constexpr float DRIFT_VAL=2.5;//5;
 	
 		//Animations
 		int numAnimations;
