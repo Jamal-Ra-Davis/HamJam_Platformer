@@ -5,6 +5,6 @@ drift_val 3.0
 maxSpeed 6
 moveSpeed 0.6
 stopSpeed 0.5
-fallSpeed 0.35
+fallSpeed 0.40
 maxFallSpeed 15.0
 jumpStart -9
