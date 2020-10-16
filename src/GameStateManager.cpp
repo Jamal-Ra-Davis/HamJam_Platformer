@@ -19,8 +19,6 @@ GameStateManager::GameStateManager(SDL_Renderer *renderTarget_)
 	gameStates[currentState]->init();
 	//setState(currentState);
 	printf("Loaded title state\n");
-	//gameStates[0] = new MenuState(this, renderTarget);
-	//gameStates[1] = new Level1State(this, renderTarget);
 }
 
 GameStateManager::~GameStateManager()
@@ -67,6 +65,7 @@ void GameStateManager::loadState(int state)
 
 	switch (state)
 	{
+/*
 		case MENU_STATE:
 		{
 			gameStates[state] = new MenuState(this, renderTarget);
@@ -87,6 +86,7 @@ void GameStateManager::loadState(int state)
 			gameStates[state] =  new WinState(this, renderTarget);
 			break;
 		}
+*/
         case PIG_STATE:
         {
             gameStates[state] =  new PigState(this, renderTarget);

@@ -40,7 +40,7 @@ class GameState
 		virtual void keyPressed(int k) =0;
 		virtual void keyReleased(int k) =0;
 };
-
+/*
 class MenuState : public GameState
 {
 	private:
@@ -209,7 +209,7 @@ class WinState : public GameState
         void keyPressed(int k);
         void keyReleased(int k);
 };
-
+*/
 class PigState : public GameState
 {
     private:

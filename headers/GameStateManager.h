@@ -4,11 +4,6 @@
 #include "../headers/GameState.h"
 
 
-//enum GameStateNames
-//{
-//	MENU_STATE, LEVEL1_STATE, NUM_STATES
-//};
-
 class GameState;
 class GameStateManager
 {
@@ -23,7 +18,7 @@ class GameStateManager
 	public:
 		enum GameStateNames
 		{
-    		MENU_STATE, TITLE_STATE, LEVEL1_STATE, WIN_STATE, PIG_STATE, LEVEL_CREATOR_STATE, NUM_STATES
+    		PIG_STATE, LEVEL_CREATOR_STATE, NUM_STATES
 		};
 
 		GameStateManager(SDL_Renderer *renderTarget_);
@@ -37,5 +32,4 @@ class GameStateManager
 
 		void keyPressed(int k);
 		void keyReleased(int k);
-
 };

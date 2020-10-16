@@ -1,8 +1,31 @@
-OBJS = 	./src/HamJam_Platformer.o ./src/SDL_Helpers.o ./src/GamePanel.o ./src/GameStateManager.o ./src/GameState.o ./src/Background.o\
-		./src/TileMap.o ./src/Tile.o ./src/MapObject.o ./src/Animation.o ./src/Player.o ./src/FireBall.o ./src/Enemy.o ./src/Slugger.o\
-		./src/HUD.o ./src/Explosion.o ./src/AudioPlayer.o ./src/BgObject.o ./src/GoS_Player.o ./src/Coin.o ./src/TriggerBox.o\
-		./src/GoS_HUD.o ./src/Numbers.o ./src/Bomba.o ./src/BouncyBee.o ./src/Poof.o ./src/HoneyBunny.o ./src/SleepySam.o ./src/ComboMove.o\
-		./src/InputBuffer.o ./src/Letters.o ./src/GoS_StartMenu.o ./src/Pig_Player.o ./src/Cake.o
+OBJS = 	./src/HamJam_Platformer.o \
+./src/SDL_Helpers.o \
+./src/GamePanel.o \
+./src/GameStateManager.o \
+./src/GameState.o \
+./src/Background.o \
+./src/TileMap.o \
+./src/Tile.o \
+./src/MapObject.o \
+./src/Animation.o \
+./src/FireBall.o \
+./src/HUD.o \
+./src/Explosion.o \
+./src/AudioPlayer.o \
+./src/BgObject.o \
+./src/GoS_Player.o \
+./src/Coin.o \
+./src/TriggerBox.o \
+./src/GoS_HUD.o \
+./src/Numbers.o \
+./src/Bomba.o \
+./src/Poof.o \
+./src/ComboMove.o \
+./src/InputBuffer.o \
+./src/Letters.o \
+./src/GoS_StartMenu.o \
+./src/Pig_Player.o \
+./src/Cake.o
 
 CC = g++
 DEBUG = -g
@@ -15,16 +38,12 @@ DH = ./headers/
 
 #g++ SpriteAnimation.cpp -w -lSDL2 -o SpriteAnimation
 
+$(info "OS:" $(OS))
+HEAD = ./src/
+
 
 HamJam_Platformer: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o HamJam_Platformer
-
-#enemy.o: $(DS)enemy.cpp $(DH)enemy.h $(DH)skill.h $(DH)FileFunctions.h
-#	$(CC) $(CFLAGS) $(DS)enemy.cpp -o $(DS)enemy.o
-
-#player.o: $(DS)player.cpp $(DH)player.h $(DH)enemy.h $(DH)skill.h $(DH)item.h\
-			 $(DH)Safe_Input.h
-#	$(CC) $(CFLAGS) $(DS)player.cpp -o $(DS)player.o
 
 SDL_Helpers.o: $(DS)SDL_Helpers.cpp $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)SDL_Helpers.cpp -o $(DS)SDL_Helpers.o
@@ -58,8 +77,8 @@ MapObject.o: $(DS)MapObject.cpp $(DH)MapObject.h $(DH)TileMap.h $(DH)Tile.h $(DH
 Animation.o: $(DS)Animation.cpp $(DH)Animation.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)Animation.cpp -o $(DS)Animation.o
 
-Player.o: $(DS)Player.cpp $(DH)Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)FireBall.h\
-		  $(DH)Enemy.h $(DH)AudioPlayer.h
+#Player.o: $(DS)Player.cpp $(DH)Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)FireBall.h\
+#		  $(DH)Enemy.h $(DH)AudioPlayer.h
 	$(CC) -c $(CFLAGS) $(DS)Player.cpp -o $(DS)Player.o
 
 Pig_Player.o: $(DS)Pig_Player.cpp $(DH)Pig_Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h
@@ -71,11 +90,11 @@ Cake.o: $(DS)Cake.cpp $(DH)Cake.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Audio
 FireBall.o: $(DS)FireBall.cpp $(DH)FireBall.h $(DH)MapObject.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)FireBall.cpp -o $(DS)FireBall.o
 
-Enemy.o: $(DS)Enemy.cpp $(DH)Enemy.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Bomba.h $(DH)TriggerBox.h
-	$(CC) -c $(CFLAGS) $(DS)Enemy.cpp -o $(DS)Enemy.o
+#Enemy.o: $(DS)Enemy.cpp $(DH)Enemy.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Bomba.h $(DH)TriggerBox.h
+#	$(CC) -c $(CFLAGS) $(DS)Enemy.cpp -o $(DS)Enemy.o
 
-Slugger.o: $(DS)Slugger.cpp $(DH)Slugger.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h
-	$(CC) -c $(CFLAGS) $(DS)Slugger.cpp -o $(DS)Slugger.o
+#Slugger.o: $(DS)Slugger.cpp $(DH)Slugger.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h
+#	$(CC) -c $(CFLAGS) $(DS)Slugger.cpp -o $(DS)Slugger.o
 
 HUD.o: $(DS)HUD.cpp $(DH)HUD.h $(DH)Player.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)FireBall.h
 	$(CC) -c $(CFLAGS) $(DS)HUD.cpp -o $(DS)HUD.o
@@ -108,21 +127,21 @@ Numbers.o: $(DS)Numbers.cpp $(DH)Numbers.h $(DH)SDL_Helpers.h
 Bomba.o: $(DS)Bomba.cpp $(DH)Bomba.h $(DH)MapObject.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)Bomba.cpp -o $(DS)Bomba.o
 
-BouncyBee.o: $(DS)BouncyBee.cpp $(DH)BouncyBee.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
-			 $(DH)AudioPlayer.h
+#BouncyBee.o: $(DS)BouncyBee.cpp $(DH)BouncyBee.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
+#			 $(DH)AudioPlayer.h
 	$(CC) -c $(CFLAGS) $(DS)BouncyBee.cpp -o $(DS)BouncyBee.o
 
 Poof.o: $(DS)Poof.cpp $(DH)Poof.h $(DH)SDL_Helpers.h $(DH)Animation.h $(DH)Numbers.h
 	$(CC) -c $(CFLAGS) $(DS)Poof.cpp -o $(DS)Poof.o
 
-HoneyBunny.o: $(DS)HoneyBunny.cpp $(DH)HoneyBunny.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
-			  $(DH)AudioPlayer.h
-			  $(DH)Bomba.h
-	$(CC) -c $(CFLAGS) $(DS)HoneyBunny.cpp -o $(DS)HoneyBunny.o
+#HoneyBunny.o: $(DS)HoneyBunny.cpp $(DH)HoneyBunny.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
+#			  $(DH)AudioPlayer.h
+#			  $(DH)Bomba.h
+#	$(CC) -c $(CFLAGS) $(DS)HoneyBunny.cpp -o $(DS)HoneyBunny.o
 
-SleepySam.o: $(DS)SleepySam.cpp $(DH)SleepySam.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
-			 $(DH)ComboMove.h $(DH)AudioPlayer.h
-	$(CC) -c $(CFLAGS) $(DS)SleepySam.cpp -o $(DS)SleepySam.o
+#SleepySam.o: $(DS)SleepySam.cpp $(DH)SleepySam.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h\
+#			 $(DH)ComboMove.h $(DH)AudioPlayer.h
+#	$(CC) -c $(CFLAGS) $(DS)SleepySam.cpp -o $(DS)SleepySam.o
 
 ComboMove.o: $(DS)ComboMove.cpp $(DH)ComboMove.h $(DH)SDL_Helpers.h $(DH)Animation.h $(DH)InputBuffer.h
 	$(CC) -c $(CFLAGS) $(DS)ComboMove.cpp -o $(DS)ComboMove.o

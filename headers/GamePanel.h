@@ -4,6 +4,8 @@
 #include <string>
 #include "../headers/GameStateManager.h"
 
+//320x240 is a good sweet spot
+
 class GamePanel
 {
 	private:
@@ -24,8 +26,8 @@ class GamePanel
 
 	public:
 		static bool *isRunningControl;
-		static const int WIDTH = 320;//480;//300;//214;//320
-		static const int HEIGHT = 240;//352;//220;//141;//240
+		static const int WIDTH = 320;//300;//214;//320
+		static const int HEIGHT = 240;//220;//141;//240
 
 		static int WINDOW_WIDTH;
 		static int WINDOW_HEIGHT;

@@ -7,7 +7,7 @@
 
 #define GAME_WINDOW_W GamePanel::WIDTH //480 //300
 #define GAME_WINDOW_H GamePanel::HEIGHT //352 //220
-
+/*
 MenuState::MenuState(GameStateManager *gsm_, SDL_Renderer *renderTarget_) 
 {
 	gsm = gsm_;
@@ -130,10 +130,11 @@ void MenuState::keyReleased(int k)
 {
 
 }
-
+*/
 
 //-------------------------------------
 
+/*
 Level1State::Level1State(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 {
 	gsm = gsm_;
@@ -143,7 +144,6 @@ Level1State::Level1State(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 	bg = NULL;
 	gos_player = NULL;
     pig_player = NULL;
-	//bouncyBee = NULL;
 	sleepySam = NULL;
 	comboMove = NULL;
 
@@ -184,8 +184,6 @@ Level1State::Level1State(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 	reachedHoneyBunny = false;
 	reachedSleepySam = false;
 	you_lose = false;
-
-	//init();
 }
 Level1State::~Level1State()
 {
@@ -222,11 +220,6 @@ Level1State::~Level1State()
         delete pig_player;
     pig_player = NULL;
 
-	//if(bouncyBee)
-	//	delete bouncyBee;
-	//bouncyBee = NULL;
-
-	
 
 	if (bgm)
 		delete bgm;
@@ -408,7 +401,7 @@ void Level1State::init()
     }
 	level_sounds[POOF_SFX] = new AudioPlayer("./Resources/SFX/BMOGame_EnemyDies.wav", false);
 	level_sounds[LEVEL_START_SFX] = new AudioPlayer("./Resources/SFX/BMOGame_LevelStart.wav", false);
-	level_sounds[LEVEL_LOSE_SFX] = new AudioPlayer(/*"./Resources/SFX/BMOGame_Death.wav"*/"./Resources/SFX/BMOGame_YouLose.wav", false);
+	level_sounds[LEVEL_LOSE_SFX] = new AudioPlayer("./Resources/SFX/BMOGame_YouLose.wav", false);
 	level_sounds[RESPAWN_SFX] = new AudioPlayer("./Resources/SFX/BMOGame_Respawn.wav", false);
 	
 
@@ -479,7 +472,7 @@ void Level1State::update()
 	}
 	if (player_died)
 	{
-		if (getMs() - screen_timer >= 3000/*4000*/)
+		if (getMs() - screen_timer >= 3000)
 		{
 			lives--;
 			if (lives < 0)
@@ -546,48 +539,13 @@ void Level1State::update()
 			game_win = true;
 		}	
 	}
-	/*
-	if ((triggerBoxes[1]->intersectsObject(gos_player) || triggerBoxes[2]->intersectsObject(gos_player)))
-	{
-		//trackPlayerY = true;
-		triggerBoxes[0]->reset();
-		triggerBoxes[3]->reset();
-	}
-	else if((triggerBoxes[0]->intersectsObject(gos_player) || triggerBoxes[3]->intersectsObject(gos_player)))
-	{
-		//playerYLock = gos_player->getY();
-		//trackPlayerY = false;	
-		triggerBoxes[1]->reset();
-        triggerBoxes[2]->reset();
-	}
-	if (gos_player->isOnGround())
-	{
-		if (triggerBoxes[1]->wasTripped() || triggerBoxes[2]->wasTripped())
-		{
-			trackPlayerY = true;
-		}
-		else if (triggerBoxes[0]->wasTripped() || triggerBoxes[3]->wasTripped())
-		{
-			playerYLock = gos_player->getY();
-        	trackPlayerY = false;
-		}
-	}
-	*/
+
 	if (gos_player->isOnGround())
 	{
 		playerYLock = gos_player->getY();
 	}
 	updateGameCamera();	
-	/*
-	double x = tileMap->getX();
-    double y = tileMap->getY();
-    double x1 = bgTileMap->getX() - x;
-    double y1 = bgTileMap->getY() - y;
-    bgTileMap->setPosition((int)(tileMap->getX()+0), (int)(tileMap->getY()-66));
-	*/
 
-	//for (int i=0; i<4; i++)
-	//	triggerBoxes[i]->intersectsObject(gos_player);
 
 	std::list<TriggerBox*>::iterator trig_iter;
     for (trig_iter=triggerBox_list.begin(); trig_iter != triggerBox_list.end(); ++trig_iter)
@@ -597,36 +555,18 @@ void Level1State::update()
     }
 
 
-	//if (triggerBoxes[0]->intersectsObject(gos_player))
-	//{
-	//	player_died = true;
-	//}
 	if (fireBox0->intersectsObject(gos_player) || fireBox1->intersectsObject(gos_player) || fireBox2->intersectsObject(gos_player)
 		 || pitBox0->intersectsObject(gos_player) || pitBox1->intersectsObject(gos_player))
 	{
 		gos_player->setDead(true);
 		////player_died = true;
 	}	
-	/*
-	if (triggerBoxes[3]->wasTripped())
-	{
-		bouncyBee->setActive(true);
-	}
-	bouncyBee->update();
-	*/
-
-
-	//if (gos_player->intersects(coin) && !coin->isCollected())
-	//{
-	//	coin->collect();
-	//}
-	//printf("(X,Y) = %d, %d\n", (int)gos_player->getX(), (int)gos_player->getY());
 
 	sun->update();
 	slime->update();
 
 	std::list<Coin*>::iterator iter;
-	for (iter=coins.begin(); iter != coins.end(); /*++iter*/)
+	for (iter=coins.begin(); iter != coins.end(); )
     {
         Coin *coin_ = (*iter);
         coin_->update();
@@ -654,35 +594,7 @@ void Level1State::update()
 	//tileMap->setPosition(GamePanel::WIDTH/2 - player->getX(),
 	//					 GamePanel::HEIGHT/2 - player->getY());
 
-	/*
-	if (trackPlayerY)
-	{
-		tileMap->setPosition(GamePanel::WIDTH/2 - gos_player->getX() - 18,
-        	               GamePanel::HEIGHT/2 - gos_player->getY() + 12);
-	}
-	else
-	{
-		tileMap->setPosition(GamePanel::WIDTH/2 - gos_player->getX() - 18,
-                           GamePanel::HEIGHT/2 - playerYLock + 12);
-	}
-	*/
 
-/*
-	double x = tileMap->getX();
-    double y = tileMap->getY();
-    double x1 = bgTileMap->getX() - x;
-    double y1 = bgTileMap->getY() - y;
-	bgTileMap->setPosition((int)(tileMap->getX()+0), (int)(tileMap->getY()-66));
-*/
-/*
-	bg->setPosition(tileMap->getX(), tileMap->getY());
-
-	player->checkAttack(enemies);
-	if (player->getY() > 400 || player->isDead())
-    {
-        *(GamePanel::isRunningControl) = false;
-    }	
-*/
 	gos_player->checkAttack(enemies);
 
 	if (!reachedSleepySam)
@@ -708,8 +620,6 @@ void Level1State::update()
 		{
 			double xPos, yPos;
 			enemy->getPoofPosition(&xPos, &yPos);
-			//int xPos = (int)enemy->getX();
-			//int yPos = (int)enemy->getY();
 			int eScore = enemy->getScore();
 			score += eScore;
 			delete enemy;
@@ -756,24 +666,6 @@ void Level1State::update()
 			++poofs_iter;
 		}
     }
-/*	
-	std::list<Explosion*>::iterator explosions_iter;
-	for (explosions_iter=explosions.begin(); explosions_iter != explosions.end(); )
-	{
-		Explosion *explosion = *explosions_iter;
-		explosion->update();
-		if (explosion->shouldRemove())
-		{
-			delete explosion;
-			*explosions_iter = NULL;
-			explosions_iter = explosions.erase(explosions_iter);
-		}
-		else
-		{
-			++explosions_iter;
-		}
-	}
-*/
 
 }
 void Level1State::draw()
@@ -781,24 +673,11 @@ void Level1State::draw()
 	SDL_DisplayMode current;
 	SDL_GetDesktopDisplayMode(0, &current);
 	int window_width, window_height;
-	//SDL_GetWindowSize()
-/*
-	SDL_Texture *preScaleTexture = NULL;
-	SDL_Texture *gameWorldTexture = NULL;
-
-	//gameWorldTexture = SDL_CreateTexture(renderTarget, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, GamePanel::WIDTH, GamePanel::HEIGHT);
-	preScaleTexture = SDL_CreateTexture(renderTarget, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 206, 152);
-	gameWorldTexture = SDL_CreateTexture(renderTarget, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 206, 116);
-*/
-	//SDL_Rect scaleRect = {11, 11+110, 3*206, 3*116};
 
 	
 	//Setup to render to gameWorldTexture instead of final screen
 	SDL_SetRenderTarget( renderTarget, gameWorldTexture );
 
-
-	//Draw Background
-	//bg->draw();
 
 	//Draw Tilemap
 
@@ -915,30 +794,9 @@ void Level1State::draw()
 	SDL_RenderCopy(renderTarget, preScaleTexture, NULL, &preScaleRect);
 	//SDL_RenderCopy(renderTarget, gameWorldTexture, NULL, &scaleRect);
 
-/*
-	SDL_DestroyTexture(gameWorldTexture);
-	SDL_DestroyTexture(preScaleTexture);	
-	gameWorldTexture = NULL;
-	preScaleTexture = NULL;
-	*/
 }
 void Level1State::populateEnemies()
 {
-/*
-	int locations[4][2] = {
-							{200, 100},
-							{1525, 200},
-							{1680, 190},
-							{1800, 190}
-						};
-
-	for (int i=0; i<4; i++)
-	{
-		Slugger *s = new Slugger(tileMap, renderTarget);
-    	s->setPosition(locations[i][0], locations[i][1]);
-    	enemies.push_back(s);
-	}
-*/
 	BouncyBee *bouncyBee_ = new BouncyBee(tileMap, renderTarget);
     bouncyBee_->setPosition(1000, 154 - 8);
     bouncyBee_->setVector(0, 0);
@@ -1000,8 +858,6 @@ void Level1State::reset()
 	comboMove->reset();
 	bgm->stop();
 	bgm->play(AudioPlayer::LOOP);
-	//gos_player->setPosition(70, 105);
-    //gos_player->setVector(0, 0);	
 }
 void Level1State::updateGameCamera()
 {
@@ -1156,10 +1012,10 @@ void Level1State::keyReleased(int k)
         }
     }
 }
+*/
 
 
-
-
+/*
 TitleState::TitleState(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 {
 	printf("Title screen constructor\n");
@@ -1168,7 +1024,6 @@ TitleState::TitleState(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 	animationTexture = NULL;
 	sprite_rects = NULL;
 	bgm = NULL;
-    //init();
 }
 TitleState::~TitleState()
 {
@@ -1281,9 +1136,9 @@ void TitleState::keyReleased(int k)
 {
 
 }
-
+*/
 //-------------------------------------------------
-
+/*
 WinState::WinState(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 {
 	gsm = gsm_;
@@ -1303,7 +1158,6 @@ WinState::WinState(GameStateManager *gsm_, SDL_Renderer *renderTarget_)
 	text0_delays = NULL;
 	score = NULL;
 	textSFX = NULL;
-	//text_Fin_SFX = NULL;
 }
 WinState::~WinState()
 {
@@ -1379,11 +1233,6 @@ WinState::~WinState()
 		delete textSFX;
 	}
 	textSFX = NULL;
-/*
-	if (text_Fin_SFX)
-        delete text_Fin_SFX;
-    text_Fin_SFX = NULL;
-*/
 }
 void WinState::init()
 {
@@ -1444,8 +1293,6 @@ void WinState::init()
 	text0[2] = new Letters(renderTarget, "DEFENDED", 3, 0, 2*152/5, false);
 	text0[3] = new Letters(renderTarget, "THE", 3, 0, 3*152/5, false);
 	text0[4] = new Letters(renderTarget, "SUN", 3, 0, 3*152/5, false);
-
-
 
 
 	int lineWidth = text0[0]->getWidth();
@@ -1512,12 +1359,6 @@ void WinState::update()
 			{
 				if (getMs() - timer >= text0_delays[counter])
 				{
-					/*
-					if (counter >= 0 && counter < 4)
-						textSFX->play(0);
-					else
-						text_Fin_SFX->play(0);
-					*/
 					if (counter == 0)
 						textSFX[TEXT_START_SFX]->play(0);
 					else if (counter < 4)
@@ -1590,11 +1431,8 @@ void WinState::update()
 void WinState::draw()
 {
 	SDL_SetRenderTarget( renderTarget, preScaleTexture );
-	//SDL_SetRenderDrawColor(renderTarget, 0xFF, 0, 0, 0xFF);
     SDL_RenderClear(renderTarget);
-	//SDL_SetRenderDrawColor(renderTarget, 0, 0, 0, 0xFF);
 
-	//---------------------
 
 	for (int i=0; i<text0_size; i++)
 		text0[i]->draw();
@@ -1663,7 +1501,7 @@ void WinState::keyReleased(int k)
 
 }
 
-
+*/
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -1747,14 +1585,7 @@ void PigState::init()
     tileMap->loadMap("./Resources/Maps/creator_map.map");
     tileMap->setPosition(0, 0);
     tileMap->setTween(1);
-/*
-    bgTileMap = new TileMap(74, renderTarget);
-    bgTileMap->loadTiles("./Resources/Tilesets/GoS_BG_Tiles.bmp", "");
-    bgTileMap->loadMap("./Resources/Maps/GoS_BG.map");
-    bgTileMap->setPosition(0, -66);
-    bgTileMap->setTween(1);
-    bgTileMap->setFixBounds(false);
-*/
+
     bg = new Background("./Resources/Backgrounds/grassbg1.bmp", 0.1, renderTarget);
 
     pig_player = new Pig_Player(tileMap, renderTarget);
@@ -1949,9 +1780,9 @@ void PigState::keyPressed(int k)
         case SDLK_LSHIFT:
         {
             //player->setGliding(false);
-            bgm->stop();
+            //bgm->stop();
             //level_sounds[LEVEL_LOSE_SFX]->stop(-1);
-            gsm->setState(GameStateManager::TITLE_STATE);
+            //gsm->setState(GameStateManager::TITLE_STATE);
             break;
         }
         case SDLK_RSHIFT:
@@ -2012,16 +1843,16 @@ void PigState::keyReleased(int k)
         case SDLK_LSHIFT:
         {
             //player->setGliding(false);
-            bgm->stop();
+            //bgm->stop();
             //level_sounds[LEVEL_LOSE_SFX]->stop(-1);
-            gsm->setState(GameStateManager::TITLE_STATE);
+            //gsm->setState(GameStateManager::TITLE_STATE);
             break;
         }
         case SDLK_RSHIFT:
         {
-            bgm->stop();
+            //bgm->stop();
             //level_sounds[LEVEL_LOSE_SFX]->stop(-1);
-            *(GamePanel::isRunningControl) = false;
+            //*(GamePanel::isRunningControl) = false;
             break;
         }
         case SDLK_RETURN:
