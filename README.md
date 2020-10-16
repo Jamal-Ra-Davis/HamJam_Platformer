@@ -6,7 +6,7 @@ Gameplay:
 
 [RIGHT]: Move Right
 
-[SPACE]: Jump 
+[SPACE]: Jump .
 
 [Z]: Dash
 
