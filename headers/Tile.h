@@ -6,7 +6,6 @@ class Tile
 	private:
 		SDL_Texture *image;
 		SDL_Rect cropRect;
-		//SDL_Rect posRect;
 		int type;
 		int *heightMap;
 	public:

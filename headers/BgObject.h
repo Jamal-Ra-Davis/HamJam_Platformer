@@ -10,7 +10,7 @@ class BgObject : public MapObject
         SDL_Rect *sprite_rects;
         int numSprites;
 
-		static const char* BG_OBJECT_FILE;// = "./Resources/Files/BgObject_List.txt";
+		static const char* BG_OBJECT_FILE;
 
 	public:
 		BgObject(TileMap *tm, SDL_Renderer *renderTarget_, int id);

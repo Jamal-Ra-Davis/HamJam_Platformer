@@ -23,35 +23,6 @@ int InputBuffer::data[COMBO_LENGTH] = {
 
 InputBuffer::InputBuffer()
 {
-/*
-	int temp[COMBO_LENGTH] = {
-                        UP,
-                        DOWN,
-                        LEFT,
-                        LEFT,
-                        RIGHT,
-                        RIGHT,
-                        DOWN,
-                        SPIN,
-                        DOWN,
-                        UP,
-                        LEFT,
-                        RIGHT,
-                        LEFT,
-                        DOWN,
-                        SPIN,
-                        UP,
-                        DOWN,
-                        JUMP
-                    };
-*/
-	//max_list_size = COMBO_LENGTH;//max_list_size looks like a constant. can probably remove and just use COMBO_LENGTH
-	//for (int i=0; i<COMBO_LENGTH; i++)
-	//{
-	//	data[i] = temp[i];
-	//}
-
-
 	halfMatch = false;
     midMatch = false;
     fullMatch = false;

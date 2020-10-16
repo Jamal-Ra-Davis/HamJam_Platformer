@@ -31,7 +31,6 @@ Slugger::Slugger(TileMap *tm, SDL_Renderer *renderTarget_) : Enemy(tm, renderTar
     sprite_rects = new SDL_Rect[numSprites];
 	for (int i=0; i<numSprites; i++)
     {
-        //sprite_rects[i] = {i*width, 0, width, height};
         sprite_rects[i].x = i*width;
         sprite_rects[i].y = 0;
         sprite_rects[i].w = width;

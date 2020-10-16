@@ -44,7 +44,6 @@ Player::Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm, renderT
 	fire = maxFire;
 	fireCost = 200;
 	fireBallDamage = 5;
-	//fireBalls = newList<FireBall>???
 
 	scratchDamage = 8;
 	scratchRange = 40;
@@ -64,7 +63,6 @@ Player::Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm, renderT
 	{
 		sprite_rects[i] = NULL;
 		sprite_rects[i] = new SDL_Rect[frameNumbers[i]];
-		//printf("DEBUG: frameNumbers[%d] = %d\n", i, frameNumbers[i]);
 	}
 
 	animationTexture = LoadTexture("./Resources/Sprites/Player/playersprites.bmp", renderTarget);
@@ -106,8 +104,6 @@ Player::Player(TileMap *tm, SDL_Renderer *renderTarget_) : MapObject(tm, renderT
 	}
 	player_sounds[JUMP_SFX] = new AudioPlayer("./Resources/SFX/jump.wav", false);
 	player_sounds[SCRATCH_SFX] = new AudioPlayer("./Resources/SFX/scratch.wav", false);
-
-	//printf("DEBUG: Completed Player constructor\n");	
 }
 Player::~Player()
 {
@@ -392,22 +388,6 @@ void Player::draw()
 		}
 	}
 	mapObjectDraw();
-
-/*
-	if (facingRight)
-	{
-		SDL_Rect posRect = {(int)(x + xmap - width/2), (int)(y + ymap - height/2), width, height};
-		SDL_Rect cropRect = animation.getImageRect();
-		SDL_RenderCopyEx(renderTarget, animation.getFrameTexture(), &cropRect, &posRect, 0, NULL, SDL_FLIP_NONE);
-	}
-	else
-	{
-		SDL_Rect posRect = {(int)(x + xmap - width/2), (int)(y + ymap - height/2), width, height};
-		SDL_Rect cropRect = animation.getImageRect();
-        SDL_RenderCopyEx(renderTarget, animation.getFrameTexture(), &cropRect, &posRect, 0, NULL, SDL_FLIP_HORIZONTAL);
-	}
-*/
-	//printf("DEBUG: Exiting player draw function\n");
 }
 void Player::checkAttack(std::list<Enemy*> enemies)
 {

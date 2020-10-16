@@ -43,14 +43,6 @@ AudioPlayer::AudioPlayer(std::string s, bool music_)
 AudioPlayer::~AudioPlayer()
 {
 	close();
-/*
-	if (bgm)
-		Mix_FreeMusic(bgm);
-	bgm = NULL;
-	if (sfx)
-		Mix_FreeChunk(sfx);
-	sfx = NULL;
-*/
 }
 void AudioPlayer::play(int repeat, int channel)
 {

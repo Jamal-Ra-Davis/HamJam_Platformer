@@ -22,8 +22,6 @@ FireBall::FireBall(TileMap *tm, SDL_Renderer *renderTarget_, bool right) : MapOb
 
 	//load sprites
 	animationTexture = LoadTexture("./Resources/Sprites/Player/fireball.bmp", renderTarget);
-	//if (animationTexture)
-    //    printf("DEBUG: Loaded fireball textures\n");
 
 	numSprites = 4;
     sprite_rects = NULL;
@@ -31,7 +29,6 @@ FireBall::FireBall(TileMap *tm, SDL_Renderer *renderTarget_, bool right) : MapOb
 
 	for (int i=0; i<numSprites; i++)
 	{
-		//sprite_rects[i] = {i*width, 0, width, height};
 		sprite_rects[i].x = i*width;
 		sprite_rects[i].y = 0;
 		sprite_rects[i].w = width;
@@ -45,7 +42,6 @@ FireBall::FireBall(TileMap *tm, SDL_Renderer *renderTarget_, bool right) : MapOb
 
 	for (int i=0; i<numHitSprites; i++)
     {
-        //hitSprite_rects[i] = {i*width, height, width, height};
 		hitSprite_rects[i].x = i*width;
         hitSprite_rects[i].y = height;
         hitSprite_rects[i].w = width;
@@ -96,20 +92,6 @@ void FireBall::draw()
 {
 	setMapPosition();
 	mapObjectDraw();
-/*	
-	if (facingRight)
-    {
-        SDL_Rect posRect = {(int)(x + xmap - width/2), (int)(y + ymap - height/2), width, height};
-        SDL_Rect cropRect = animation.getImageRect();
-        SDL_RenderCopyEx(renderTarget, animation.getFrameTexture(), &cropRect, &posRect, 0, NULL, SDL_FLIP_NONE);
-    }
-    else
-    {
-        SDL_Rect posRect = {(int)(x + xmap - width/2), (int)(y + ymap - height/2), width, height};
-        SDL_Rect cropRect = animation.getImageRect();
-           SDL_RenderCopyEx(renderTarget, animation.getFrameTexture(), &cropRect, &posRect, 0, NULL, SDL_FLIP_HORIZONTAL);
-    }
-*/
 }
 
 

@@ -9,8 +9,6 @@ class InputBuffer
 {
 	private:
 		std::list<int> inputs;
-		//int max_list_size;
-    	//int data[COMBO_LENGTH];
 
 		bool halfMatch;
 		bool midMatch;

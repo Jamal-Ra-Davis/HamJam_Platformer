@@ -12,7 +12,6 @@ GamePanel::GamePanel()
 	window_name = "Window Name";
 	isRunning = false;
 	FPS = 60;
-	//frameTime = 0;
 	prevTime = 0;
 	currTime = 0;
 	deltaTime = 0;

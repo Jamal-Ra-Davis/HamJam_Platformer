@@ -19,8 +19,6 @@ Cake::Cake(TileMap *tm, SDL_Renderer *renderTarget_, int value_) : MapObject(tm,
 	facingRight = true;
 
 	//load sprites
-	//numAnimations = NUM_ANIMATIONS;
-    //numAnimations = 8;
     frameNumbers = NULL;
     frameNumbers = new int[NUM_ANIMATIONS];
     int tempNums[NUM_ANIMATIONS] = {1, 4, 5};
@@ -33,12 +31,9 @@ Cake::Cake(TileMap *tm, SDL_Renderer *renderTarget_, int value_) : MapObject(tm,
     {
         sprite_rects[i] = NULL;
         sprite_rects[i] = new SDL_Rect[frameNumbers[i]];
-        //printf("DEBUG: frameNumbers[%d] = %d\n", i, frameNumbers[i]);
     }
 
 	animationTexture = LoadTexture("./Resources/Sprites/Cake_spritesheet.bmp", renderTarget);
-    //if (animationTexture)
-    //    printf("DEBUG: Loaded player textures\n");
     for (int i=0; i<NUM_ANIMATIONS; i++)
     {
         for (int j=0; j<frameNumbers[i]; j++)
@@ -54,8 +49,6 @@ Cake::Cake(TileMap *tm, SDL_Renderer *renderTarget_, int value_) : MapObject(tm,
     animation.setFrames(animationTexture, sprite_rects[currentAction], frameNumbers[currentAction]);
     animation.setDelay(-1);
     width = sprite_rects[currentAction][animation.getFrame()].w;
-
-	//coin_sound =  new AudioPlayer("./Resources/SFX/BMOGame_CoinCollect.wav", false);	
 }
 
 Cake::~Cake()

@@ -1,7 +1,5 @@
-//#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <sys/time.h>
-//#include <string>
 #include "../headers/SDL_Helpers.h"
 
 SDL_Texture* LoadTexture(std::string filePath, SDL_Renderer *renderTarget)

@@ -25,31 +25,6 @@ void Animation::setFrames(SDL_Texture *texture_, SDL_Rect *cropFrames_, int numF
 	if (playsOnce)
 		loopNum = 1;
 }
-/*
-void Animation::update()
-{
-	if (delay == -1)
-		return;
-	if (playsOnce && playedOnce)
-		return;		
-
-	int tempFrame = currentFrame;
-	double elapsed = (getMs() - startTime);
-	if (elapsed > delay)
-	{
-		currentFrame++;
-		startTime = getMs();
-	}
-	if (currentFrame == numFrames)
-	{
-		if (!playsOnce)
-			currentFrame = 0;
-		else
-			currentFrame = tempFrame;
-		playedOnce = true;
-	}
-}
-*/
 
 void Animation::update()
 {
@@ -84,7 +59,6 @@ void Animation::update()
 			else
             	currentFrame = 0;
 		}
-        //playedOnce = true;
     }
 }
 

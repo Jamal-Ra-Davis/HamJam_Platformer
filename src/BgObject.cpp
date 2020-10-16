@@ -42,7 +42,6 @@ BgObject::BgObject(TileMap *tm, SDL_Renderer *renderTarget_, int id) : MapObject
     cwidth = -1;
     cheight = -1;
 
-
 	animationTexture = NULL;
     animationTexture = LoadTexture(filename, renderTarget);
 	numSprites = frameNum_;
@@ -50,7 +49,6 @@ BgObject::BgObject(TileMap *tm, SDL_Renderer *renderTarget_, int id) : MapObject
     sprite_rects = new SDL_Rect[numSprites];
     for (int i=0; i<numSprites; i++)
     {
-        //sprite_rects[i] = {i*width, 0, width, height};
         sprite_rects[i].x = i*width;
         sprite_rects[i].y = 0;
         sprite_rects[i].w = width;

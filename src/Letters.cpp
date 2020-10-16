@@ -42,5 +42,4 @@ void Letters::draw()
 		SDL_RenderCopy(renderTarget, letterTexture, &cropRect, &letterRect);
 		letterRect.x += LETTER_WIDTH + spacing;	
 	}
-	//printf("\n");
 }

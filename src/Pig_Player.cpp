@@ -1,4 +1,5 @@
 #include <time.h>
+#include <string.h>
 
 #include "../headers/Pig_Player.h"
 #include "../headers/SDL_Helpers.h"

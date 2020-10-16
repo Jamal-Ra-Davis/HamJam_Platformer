@@ -17,12 +17,6 @@ MapObject::MapObject(TileMap *tm, SDL_Renderer *renderTarget_)
 		tileSize = tm->getTileSize();
 	renderTarget = renderTarget_;
 }
-/*
-MapObject::~MapObject()
-{
-
-}
-*/
 void MapObject::setPosition(double x_, double y_)
 {
 	x = x_;
@@ -61,17 +55,7 @@ void MapObject::calculateCorners(double x_, double y_)
 	int topTile = (int)(y_ - cheight/2)/tileSize;
 	int bottomTile = (int)(y_ + cheight/2 - 1)/tileSize;
 
-/*
-	int leftTile = ((int)(x - cwidth/2))/tileSize;
-	int rightTile = ((int)(x + cwidth/2))/tileSize;
-	int topTile = ((int)(y - cheight/2))/tileSize;
-	int bottomTile = ((int)(y + cheight/2))/tileSize;
-
-	int currTileX = (int)(x/tileSize);
-	int currTileY = (int)(y/tileSize);
-*/
 	if (topTile < 0 || bottomTile >= tileMap->getNumRows() || leftTile < 0 || rightTile >= tileMap->getNumCols())
-	//if (bottomTile < 0 || topTile >= tileMap->getNumRows() || leftTile < 0 || rightTile >= tileMap->getNumCols())
 	{
 		topLeft = false;
 		topRight = false;
@@ -167,15 +151,6 @@ void MapObject::checkTileMapCollision()
 		}
 	}
 }
-/*
-void MapObject::setAnimation(SDL_Texture* animationTexture, int action, SDL_Rect *anm_rects, int frameCount, int delay, bool playsOnce, int loopNum)
-{
-	currentAction = action;
-    animation.setFrames(animationTexture, anm_rects, frameCount, playsOnce, loopNum);
-    animation.setDelay(delay);
-    width = sprite_rects[currentAction][animation.getFrame()].w;
-}
-*/
 bool MapObject::notOnScreen()
 {
 	return( x + xmap + width < 0 || x + xmap - width > GamePanel::WIDTH || y + ymap + height < 0 || y + ymap - height > GamePanel::HEIGHT);

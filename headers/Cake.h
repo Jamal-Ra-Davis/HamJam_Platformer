@@ -12,11 +12,9 @@ class Cake : public MapObject
 		bool visible;
 
 		//Animations
-        //int numAnimations;
         SDL_Texture *animationTexture;
         SDL_Rect **sprite_rects;
         int *frameNumbers;
-		//AudioPlayer *coin_sound;		
 
 	public:
 		enum Cake_States {DEFAULT, EAT_START, EAT_END, NUM_ANIMATIONS};

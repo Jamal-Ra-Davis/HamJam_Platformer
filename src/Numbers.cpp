@@ -42,10 +42,8 @@ void Numbers::draw(int number)
 		}
 		int dig = number/mod;
 		number = number % mod;
-		//printf("%d-", dig);
 		SDL_Rect cropRect = {dig*NUM_WIDTH, 0, NUM_WIDTH, NUM_HEIGHT};
 		SDL_RenderCopy(renderTarget, numberTexture, &cropRect, &numRect);
 		numRect.x += NUM_WIDTH + spacing;	
 	}
-	//printf("\n");
 }

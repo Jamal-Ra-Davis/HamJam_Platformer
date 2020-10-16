@@ -92,8 +92,6 @@ class MapObject
 		void calculateCorners(double x_, double y_);
 		void checkTileMapCollision();
 
-		//void setAnimation(SDL_Texture* animationTexture, int action, SDL_Rect *anm_rects, int frameCount, int delay, bool playsOnce=false, int loopNum=-1);
-
 		bool notOnScreen();
 		SDL_Rect getCollisionRect();
 		void drawRect(SDL_Rect rect);

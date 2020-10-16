@@ -14,7 +14,5 @@ int main(int nargs, char *args[])
 	GamePanel gPanel;
 	gPanel.setWindowName("Guardians of Sunshine");
 	gPanel.run();
-
-
 	return 0;
 }

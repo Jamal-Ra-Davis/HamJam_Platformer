@@ -11,7 +11,6 @@ Tile::Tile(SDL_Texture *image_, int cropX, int cropY, int cropWidth, int cropHei
 	type = type_;
 
 	heightMap = NULL;
-	//heightMap = new int[cropWidth];
 }
 Tile::~Tile()
 {
@@ -41,9 +40,6 @@ bool Tile::checkCollision(int x, int y)
 	y_ = y % cropRect.h;
 
 	int mapHeight = heightMap[x_];
-	//for (int i=0; i<cropRect.w; i++)
-	//	printf("%d ", heightMap[i]);
-	//printf("x_: %d, y_: %d, mapHeight: %d\n", x_, y_, mapHeight);
 	if (mapHeight == cropRect.h)
 		return true;
 	else if (mapHeight == 0)
@@ -64,5 +60,4 @@ bool Tile::checkCollision(int x, int y)
 		else
 			return false;
 	}
-	
 }
