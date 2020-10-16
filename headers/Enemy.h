@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../headers/MapObject.h"
-#include "../headers/Bomba.h"
 #include "../headers/TriggerBox.h"
 
 class Enemy : public MapObject
@@ -36,7 +35,6 @@ class Enemy : public MapObject
         TriggerBox* getTriggerBox() {return triggerBox;}
 
 		virtual bool isReady() {return false;}
-		virtual void checkBombaCollision(Bomba *bomba) {};
 		virtual void getPoofPosition(double *x_, double *y_);
 		virtual void update() {};
 		virtual void draw() {};
