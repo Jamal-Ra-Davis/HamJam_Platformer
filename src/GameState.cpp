@@ -104,7 +104,7 @@ void PigState::init()
     trackPlayerY = false;
     playerYLock = 105;
 
-    bgm = new AudioPlayer("./Resources/Music/BMOGame_LevelLoop_Louder.ogg", true);
+    bgm = new AudioPlayer("./Resources/Music/delightful-d.mp3", true);
     level_sounds = NULL;
     level_sounds = new AudioPlayer*[SFX_NUM];
     for (int i=0; i<SFX_NUM; i++)

@@ -1,4 +1,5 @@
 #include "../headers/InputBuffer.h"
+#include <stdio.h>
 
 int InputBuffer::data[COMBO_LENGTH] = {
                         UP,
