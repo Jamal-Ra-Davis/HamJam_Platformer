@@ -26,9 +26,9 @@ class Letters
 		bool getVisible() {return visible;}
         void setVisible(bool b) {visible = b;}
 		int getX() {return x;}
-		int setX(int x_) {x = x_;}
+		int setX(int x_) {x = x_; return 0;}
 		int getY() {return y;}
-		int setY(int y_) {y = y_;}
+		int setY(int y_) {y = y_; return 0;}
 		int getXOffset() {return xOffset;}
 		void setXOffset(int offset) {xOffset = offset;}
 		int getYOffset() {return yOffset;}

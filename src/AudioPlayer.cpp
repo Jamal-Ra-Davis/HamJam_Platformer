@@ -20,6 +20,7 @@ int AudioPlayer::initAudioSystem()
 int AudioPlayer::closeAudioSystem()
 {
 	Mix_Quit();
+    return 0;
 }
 AudioPlayer::AudioPlayer(std::string s, bool music_)
 {

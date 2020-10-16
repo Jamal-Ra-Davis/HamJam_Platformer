@@ -35,7 +35,7 @@ class Enemy : public MapObject
 		void setTriggerBox(TriggerBox *tb) {triggerBox = tb;}
         TriggerBox* getTriggerBox() {return triggerBox;}
 
-		virtual bool isReady() {};
+		virtual bool isReady() {return false;}
 		virtual void checkBombaCollision(Bomba *bomba) {};
 		virtual void getPoofPosition(double *x_, double *y_);
 		virtual void update() {};
