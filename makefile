@@ -7,6 +7,7 @@ OBJS = 	./src/HamJam_Platformer.o \
 ./src/TileMap.o \
 ./src/Tile.o \
 ./src/MapObject.o \
+./src/Enemy.o \
 ./src/Animation.o \
 ./src/FireBall.o \
 ./src/HUD.o \
@@ -90,8 +91,8 @@ Cake.o: $(DS)Cake.cpp $(DH)Cake.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Audio
 FireBall.o: $(DS)FireBall.cpp $(DH)FireBall.h $(DH)MapObject.h $(DH)SDL_Helpers.h
 	$(CC) -c $(CFLAGS) $(DS)FireBall.cpp -o $(DS)FireBall.o
 
-#Enemy.o: $(DS)Enemy.cpp $(DH)Enemy.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Bomba.h $(DH)TriggerBox.h
-#	$(CC) -c $(CFLAGS) $(DS)Enemy.cpp -o $(DS)Enemy.o
+Enemy.o: $(DS)Enemy.cpp $(DH)Enemy.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Bomba.h $(DH)TriggerBox.h
+	$(CC) -c $(CFLAGS) $(DS)Enemy.cpp -o $(DS)Enemy.o
 
 #Slugger.o: $(DS)Slugger.cpp $(DH)Slugger.h $(DH)MapObject.h $(DH)SDL_Helpers.h $(DH)Enemy.h
 #	$(CC) -c $(CFLAGS) $(DS)Slugger.cpp -o $(DS)Slugger.o
