@@ -23,14 +23,17 @@ OBJS = 	./src/HamJam_Platformer.o \
 
 ifeq ($(OS), Windows_NT)
 $(info "Compiling on Windows...")
+SHELL=cmd
 IPATH = -IC:\mingw_dev_lib\include -LC:\mingw_dev_lib\lib -w -Wl,-subsystem,windows
 LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
 PRE = ./src/
+BUILDDIR = ./build-win/
 RMCMD = del	.\src\*.o
 else
-IPATH = ""
+IPATH = 
 LFLAGS = -lSDL2 -lSDL2_mixer
-PRE = ""
+PRE = 
+BUILDDIR = 
 RMCMD = rm $(OBJS)
 endif
 
@@ -40,12 +43,9 @@ CFLAGS = -Wall $(DEBUG)
 DS = ./src/
 DH = ./headers/
 
-SHELL=cmd
-$(info "SHELL:" $(SHELL))
 
 HamJam_Platformer: $(OBJS)
-	$(CC) $(CFLAGS) $(IPATH) $(OBJS) $(LFLAGS) -o ./build-win/HamJam_Platformer
-
+	$(CC) $(CFLAGS) $(IPATH) $(OBJS) $(LFLAGS) -o $(BUILDDIR)HamJam_Platformer
 
 
 $(PRE)SDL_Helpers.o: $(DS)SDL_Helpers.cpp $(DH)SDL_Helpers.h
