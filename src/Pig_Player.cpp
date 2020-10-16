@@ -860,7 +860,7 @@ void Pig_Player::draw()
 
     setMapPosition();
 	SDL_Rect rect = this->getCollisionRect();
-	drawRect(rect);
+	//drawRect(rect);
     mapObjectDraw();
 /*
 	SDL_Rect posRect = {(int)(x - width/2), (int)(y - height/2), width, height};
