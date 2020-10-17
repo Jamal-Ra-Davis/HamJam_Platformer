@@ -12,8 +12,6 @@ Gameplay
 
 **RIGHT SHIFT**: Close
 
-**LEFT SHIFT**: \*Bugged, boots into unplayable version of Guardians of the Sunshine
-
 **C**: Enter level creator
 
 --------------------
