@@ -1,40 +1,40 @@
 # HamJam_Platformer
 
-Gameplay:
+Gameplay
+--------------------
+**LEFT**: Move Left
 
-[LEFT]: Move Left
+**RIGHT**: Move Right
 
-[RIGHT]: Move Right
+**SPACE**: Jump
 
-[SPACE]: Jump .
+**Z**: Dash
 
-[Z]: Dash
+**RIGHT SHIFT**: Close
 
-[RIGHT SHIFT]: Close
+**LEFT SHIFT**: \*Bugged, boots into unplayable version of Guardians of the Sunshine
 
-[LEFT SHIFT]: **Bugged, boots into unplayable version of Guardians of the Sunshine
-
-[C]: Enter level creator
+**C**: Enter level creator
 
 --------------------
 
-Level Creator:
+Level Creator
+--------------------
+**LEFT**: Move Left
 
-[LEFT]: Move Left
+**RIGHT**: Move Right
 
-[RIGHT]: Move Right
+**UP**: Move Up
 
-[UP]: Move Up
+**DOWN**: Move Down
 
-[DOWN]: Move Down
+**Z**: Cycle down through tiles
 
-[Z]: Cycle down through tiles
+**X**: Cycle up through tiles
 
-[X]: Cycle up through tiles
+**SPACE**: Place tile at current location
 
-[SPACE]: Place tile at current location
-
-[P]: Play level
+**P**: Play level
 
 
 --------------------
