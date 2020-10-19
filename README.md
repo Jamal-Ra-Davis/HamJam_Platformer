@@ -1,37 +1,52 @@
 # HamJam_Platformer
 
-Gameplay:
+Gameplay
+--------------------
+**LEFT**: Move Left
 
-[LEFT]: Move Left
+**RIGHT**: Move Right
 
-[RIGHT]: Move Right
+**SPACE**: Jump
 
-[SPACE]: Jump .
+**Z**: Dash
 
-[Z]: Dash
+**RIGHT SHIFT**: Close
 
-[RIGHT SHIFT]: Close
+**C**: Enter level creator
 
-[LEFT SHIFT]: **Bugged, boots into unplayable version of Guardians of the Sunshine
 
-[C]: Enter level creator
+
+Level Creator
+--------------------
+**LEFT**: Move Left
+
+**RIGHT**: Move Right
+
+**UP**: Move Up
+
+**DOWN**: Move Down
+
+**Z**: Cycle down through tiles
+
+**X**: Cycle up through tiles
+
+**SPACE**: Place tile at current location
+
+**P**: Play level
+
 
 --------------------
 
-Level Creator:
+In order to compile, the following libraries are necessary:
 
-[LEFT]: Move Left
+libsdl1.2-dev
 
-[RIGHT]: Move Right
+libsdl-image1.2-dev
 
-[UP]: Move Up
+libsdl-mixer1.2-dev
 
-[DOWN]: Move Down
+libsdl2-mixer-2.0-0
 
-[Z]: Cycle down through tiles
+libsdl-ttf2.0-dev
 
-[X]: Cycle up through tiles
-
-[SPACE]: Place tile at current location
-
-[P]: Play level
+libsdl2-dev
