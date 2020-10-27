@@ -90,6 +90,12 @@ void PigState::init()
     tileMap->setTween(1);
 
     bg = new Background("./Resources/Backgrounds/grassbg1.bmp", 0.1, renderTarget);
+	if (bg == NULL)
+	{
+		printf("ERROR: Background didn't load\n");
+		*(GamePanel::isRunningControl) = false;
+	}
+	
 
     pig_player = new Pig_Player(tileMap, renderTarget);
     pig_player->setPosition(pig_startX, pig_startY);
@@ -198,6 +204,10 @@ void PigState::draw()
 
     //Background and background objects
     //bgTileMap->draw();
+	if (bg == NULL)
+	{
+		*(GamePanel::isRunningControl) = false;
+	}
     bg->draw();
 
     //Player
@@ -467,12 +477,15 @@ void LevelCreator::draw()
 
     SDL_SetRenderTarget(renderTarget, preScaleTexture);
 
-
+	//Draw black background in case bg texture doesn't draw
+	//SDL_SetRenderDrawColor(renderTarget, 0, 0, 0, 255);
     SDL_Rect bg_rect = {0, 0, GamePanel::WIDTH, GamePanel::HEIGHT};
     SDL_RenderFillRect(renderTarget, &bg_rect);
 
     bg->draw();
+	bg->draw();
 
+	//Flashing tile effect
     int t_idx = tileMap->getMapIdx(cursor_y, cursor_x);
     tileMap->setMapIdx(cursor_y, cursor_x, 0, false);
     if (cnt > 30)
@@ -482,10 +495,25 @@ void LevelCreator::draw()
     tileMap->draw();
     tileMap->setMapIdx(cursor_y, cursor_x, t_idx, false);
 
+	uint8_t r_, g_, b_, a_;
+	SDL_GetRenderDrawColor(renderTarget, &r_, &g_, &b_, &a_);
 
     //draw cursor
+	if (tileMap->getTypeFromTileSet(tile_idx) == Tile::BLOCKED)
+	{
+		//If blocked set render color to blue
+		SDL_SetRenderDrawColor(renderTarget, 255, 255, 255, 255);
+	}
+	else
+	{
+		//Set render color to black
+		SDL_SetRenderDrawColor(renderTarget, 0, 0, 0, 255);
+	}
     SDL_Rect rect = {(int)tileMap->getX() + cursor_x*30, (int)tileMap->getY() + cursor_y*30, 30, 30};
     SDL_RenderDrawRect(renderTarget, &rect);
+
+	//Revent color
+	SDL_SetRenderDrawColor(renderTarget, r_, g_, b_, a_);
 
 
     //Set renderer back to main window

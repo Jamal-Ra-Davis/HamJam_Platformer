@@ -53,6 +53,7 @@ class TileMap
 		int getWidth() {return width;}
 		int getHeight() {return height;}
 
+		int getTypeFromTileSet(int tile_idx);
 		int getType(int row, int col);
 		Tile* getTile(int row, int col);
 		Tile* getTileFromPos(int x, int y);

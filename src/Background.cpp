@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 
 #include "../headers/Background.h"
 #include "../headers/SDL_Helpers.h"
@@ -9,7 +10,9 @@ Background::Background(std::string s, double ms, SDL_Renderer *renderTarget_)
 	renderTarget = renderTarget_;
 	bgImage = NULL;
 	bgImage = LoadTexture(s.c_str(), renderTarget);
-	SDL_QueryTexture(bgImage, NULL, NULL, &textureWidth, &textureHeight);
+	int status = SDL_QueryTexture(bgImage, NULL, NULL, &textureWidth, &textureHeight);
+	if (status)
+		printf("ERROR: Failed to query texture - %s\n", SDL_GetError());
 	moveScale = ms;
 }
 Background::~Background()

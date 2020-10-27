@@ -360,6 +360,12 @@ void TileMap::fixBounds()
 	if (y > ymax)
 		y = ymax;
 }
+int TileMap::getTypeFromTileSet(int tile_idx)
+{
+	int row = tile_idx/numTilesAcross;
+	int col = tile_idx % numTilesAcross;
+	return tiles[row][col]->getType();
+}
 int TileMap::getType(int row, int col)
 {
 	int rc = map[row][col];
